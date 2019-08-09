@@ -1,8 +1,15 @@
+// run on sender page load
 document.addEventListener("DOMContentLoaded", function(){
     const form = document.getElementById("senderForm");
     form.addEventListener('submit', submitSender);
 });
 
+/**
+ * This function will generate the packets that should be send to the receiver
+ * @param {array} messageSegments array of the data segments
+ * @param {object} info object containts the current sender information such as sequence and state.
+ * @return {array} array of data packets
+ */
 const generatePackets = (messageSegments, info) => {
     const packets = [];
     messageSegments.forEach(segment => {
@@ -11,7 +18,6 @@ const generatePackets = (messageSegments, info) => {
         // generate new hash using unencrypted SC ans data segment
         const hash = hasher(info.SCa + segment.join(''));
         // encrypt the generated hash value.
-        console.log(hash);
         const encryptedhash = RC4([...info.state], hexaConstructor(hash));
         // encrypt the the data segment
         const encryptedSegment = RC4([...info.state], segment);
@@ -25,8 +31,14 @@ const generatePackets = (messageSegments, info) => {
     return packets;
 }
 
+/**
+ * This is the core function in the sender interface.
+ * It will get invoked once the sender submit the form
+ */
 const submitSender = () => {
+    // prevent page from refresh
     event.preventDefault();
+    // grab data from user
     const msg = document.getElementById('message').value;
     const key = document.getElementById('sender_key').value;
     if (isValidKey(key)) {
