@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RC4 Sender</title>
+        <script src="lib/md5.min.js"></script>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <h1>Sender Interface</h1>
+        <form id="senderForm" method="post">
+            Message:<br>
+            <input id="message" type="text" name="message" required><br>
+            Key:<br>
+            <input id="sender_key" type="text" name="key" required>
+            <button type="submit">Encrypt</button>
+        </form>
+        <script src="sender.js"></script>
+    </body>
+</html>

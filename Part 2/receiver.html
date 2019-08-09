@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>RC4 Receiver</title>
+        <script src="app.js"></script>
+    </head>
+    <body>
+        <h1>Receiver Interface</h1>
+        <form id="receiveForm" method="post">
+            Key:<br>
+            <input id="receiver_key" type="text" name="key" required>
+            <button type="submit">Decrypt</button>
+        </form>
+        <div id="decrypted_message">
+            <h4>The decrypted message is:</h4>
+        </div>
+        <script src="receiver.js"></script>
+    </body>
+</html>
